@@ -169,9 +169,6 @@ function Library.new(options)
     Library.Theme.ScrollingBarImageColor = options.ScrollingBarImageColor
     Library.Theme.Line = options.Line
 
-    -- เพิ่มบรรทัดนี้ก่อน ScreenGui.Enabled = true
-    self:setupSearchFunctionality()
-
     ScreenGui.Enabled = true
     Title.Text = options.title
     Glow.Size = UDim2.fromOffset(options.sizeX, options.sizeY)
