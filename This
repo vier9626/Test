@@ -1789,9 +1789,6 @@ task.spawn(function()
 	end
 end)
 
--- ใส่ก่อนบรรทัดนี้:
-return Library
-
 -- ควรเพิ่มตรงนี้:
 function Library:createSearchBox()
     local SearchBox = Instance.new("Frame")
