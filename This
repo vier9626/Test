@@ -169,6 +169,8 @@ function Library.new(options)
     Library.Theme.ScrollingBarImageColor = options.ScrollingBarImageColor
     Library.Theme.Line = options.Line
 
+    self:setupSearchFunctionality()
+
     ScreenGui.Enabled = true
     Title.Text = options.title
     Glow.Size = UDim2.fromOffset(options.sizeX, options.sizeY)
@@ -1786,7 +1788,6 @@ task.spawn(function()
 	end
 end)
 
--- ควรเพิ่มตรงนี้:
 function Library:createSearchBox()
     local SearchBox = Instance.new("Frame")
     SearchBox.Name = "SearchBox"
@@ -1812,32 +1813,7 @@ function Library:setupSearchFunctionality()
     
     searchBox:GetPropertyChangedSignal("Text"):Connect(function()
         local searchText = string.lower(searchBox.Text)
-        
-        -- ค้นหาในทุกแท็บและองค์ประกอบ
-        for _, tab in ipairs(self.ScreenGui.Background.Pages:GetChildren()) do
-            if tab:IsA("Frame") and tab.Name == "Page" then
-                for _, element in ipairs(tab:GetDescendants()) do
-                    if element:IsA("TextLabel") or element:IsA("TextButton") then
-                        local elementText = string.lower(element.Text or "")
-                        local elementParent = element.Parent
-                        
-                        if string.find(elementText, searchText) then
-                            elementParent.Visible = true
-                            -- Highlight ผลลัพธ์ที่พบ
-                            Utility:tween(element, {TextColor3 = Color3.fromRGB(255, 255, 0)}, 0.2)
-                        else
-                            if searchText ~= "" then
-                                elementParent.Visible = false
-                            else
-                                elementParent.Visible = true
-                                -- ยกเลิก Highlight
-                                Utility:tween(element, {TextColor3 = Theme.SecondaryTextColor}, 0.2)
-                            end
-                        end
-                    end
-                end
-            end
-        end
+        -- โลจิกการค้นหา
     end)
 end
 
