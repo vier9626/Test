@@ -169,7 +169,6 @@ function Library.new(options)
     Library.Theme.ScrollingBarImageColor = options.ScrollingBarImageColor
     Library.Theme.Line = options.Line
 
-    -- เพิ่มบรรทัดนี้ก่อน ScreenGui.Enabled = true
     self:setupSearchFunctionality()
 
     ScreenGui.Enabled = true
@@ -1789,7 +1788,6 @@ task.spawn(function()
 	end
 end)
 
--- ควรเพิ่มตรงนี้:
 function Library:createSearchBox()
     local SearchBox = Instance.new("Frame")
     SearchBox.Name = "SearchBox"
@@ -1826,14 +1824,12 @@ function Library:setupSearchFunctionality()
                         
                         if string.find(elementText, searchText) then
                             elementParent.Visible = true
-                            -- Highlight ผลลัพธ์ที่พบ
                             Utility:tween(element, {TextColor3 = Color3.fromRGB(255, 255, 0)}, 0.2)
                         else
                             if searchText ~= "" then
                                 elementParent.Visible = false
                             else
                                 elementParent.Visible = true
-                                -- ยกเลิก Highlight
                                 Utility:tween(element, {TextColor3 = Theme.SecondaryTextColor}, 0.2)
                             end
                         end
